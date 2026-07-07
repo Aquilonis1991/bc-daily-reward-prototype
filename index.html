@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>餘額每日彩金計劃</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { DEFAULT: '#d4a853', light: '#f5e6b8', dark: '#a67c2e' },
+            surface: { DEFAULT: '#0d1117', card: '#161b22', raised: '#1c2333', border: '#2d3548' },
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap');
+    body { font-family: 'Noto Sans TC', system-ui, sans-serif; }
+    .hero-glow { background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(212,168,83,0.18) 0%, transparent 60%); }
+    .gold-text { background: linear-gradient(135deg, #f5e6b8 0%, #d4a853 50%, #a67c2e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .card-glass { background: linear-gradient(145deg, rgba(28,35,51,0.95) 0%, rgba(22,27,34,0.98) 100%); border: 1px solid rgba(212,168,83,0.15); }
+    .tier-S { border-color: rgba(255,215,0,0.5); background: linear-gradient(135deg, rgba(255,215,0,0.12), transparent); }
+    .tier-A { border-color: rgba(192,192,192,0.4); }
+    .tier-B { border-color: rgba(205,127,50,0.4); }
+    .tier-C, .tier-D { border-color: rgba(45,53,72,0.8); }
+    .tier-active { box-shadow: 0 0 20px rgba(212,168,83,0.25); border-color: rgba(212,168,83,0.6) !important; }
+    .btn-gold { background: linear-gradient(135deg, #e8c96a 0%, #d4a853 45%, #a67c2e 100%); box-shadow: 0 4px 20px rgba(212,168,83,0.35); }
+    .btn-gold:hover { filter: brightness(1.08); }
+    .progress-glow { background: linear-gradient(90deg, #a67c2e, #f5e6b8, #d4a853); }
+    .schedule-dot.active { background: #d4a853; box-shadow: 0 0 8px rgba(212,168,83,0.6); }
+    .feat-icon { background: linear-gradient(135deg, rgba(212,168,83,0.15), rgba(212,168,83,0.05)); border: 1px solid rgba(212,168,83,0.2); }
+  </style>
+</head>
+<body class="bg-surface text-gray-100 min-h-screen hero-glow">
+
+  <header class="border-b border-surface-border/60 bg-surface/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <span class="text-gold font-semibold tracking-wide text-sm">BC Platform</span>
+      <div class="flex items-center gap-3">
+        <select id="accountSelect" onchange="switchAccount()"
+          class="bg-surface-raised border border-surface-border text-xs text-gray-300 rounded-full px-4 py-1.5 focus:outline-none focus:border-gold/50">
+          <option value="M001">M001 · 王小明 · S</option>
+          <option value="M002">M002 · 李小華 · B</option>
+          <option value="M003">M003 · 張大同 · D</option>
+          <option value="M004">M004 · 陳美玲 · A</option>
+        </select>
+        <a href="admin-blacklist.html" class="text-xs text-gray-500 hover:text-gold transition">後台管理 →</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 pb-16">
+
+    <!-- Hero -->
+    <section class="pt-10 pb-6 text-center">
+      <p class="text-gold/80 text-xs tracking-[0.25em] uppercase mb-3">Daily Balance Reward</p>
+      <h1 class="text-3xl md:text-4xl font-bold gold-text mb-3">餘額每日彩金計劃</h1>
+      <p class="text-gray-400 text-sm max-w-lg mx-auto">帳戶餘額持倉即有收益，等級越高、日息越多，每日自動結算</p>
+    </section>
+
+    <!-- ═══ 活動功能簡介 ═══ -->
+    <section class="mb-10">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="h-px flex-1 bg-surface-border"></div>
+        <h2 class="text-sm font-semibold text-gold tracking-wide whitespace-nowrap">活動簡介</h2>
+        <div class="h-px flex-1 bg-surface-border"></div>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="card-glass rounded-xl p-4 text-center">
+          <div class="feat-icon w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <p class="text-sm font-medium text-gray-200 mb-1">持倉生息</p>
+          <p class="text-[11px] text-gray-500 leading-relaxed">帳戶餘額達標即計入彩金，無需額外操作</p>
+        </div>
+        <div class="card-glass rounded-xl p-4 text-center">
+          <div class="feat-icon w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <p class="text-sm font-medium text-gray-200 mb-1">自動結算</p>
+          <p class="text-[11px] text-gray-500 leading-relaxed">每日多次自動結算，準時發放彩金</p>
+        </div>
+        <div class="card-glass rounded-xl p-4 text-center">
+          <div class="feat-icon w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+          </div>
+          <p class="text-sm font-medium text-gray-200 mb-1">等級越高</p>
+          <p class="text-[11px] text-gray-500 leading-relaxed">S 級日息 0.055%，年化收益最高 20%</p>
+        </div>
+        <div class="card-glass rounded-xl p-4 text-center">
+          <div class="feat-icon w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <p class="text-sm font-medium text-gray-200 mb-1">即時預估</p>
+          <p class="text-[11px] text-gray-500 leading-relaxed">結算間隔內利息持續累積，隨時掌握收益</p>
+        </div>
+      </div>
+    </section>
+
+    <div id="blacklistAlert" class="hidden mb-6 card-glass rounded-xl px-4 py-3 text-amber-300/90 text-sm border-amber-500/30"></div>
+
+    <!-- ═══ 會員中心 ═══ -->
+    <section class="mb-8">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="h-px flex-1 bg-surface-border"></div>
+        <h2 class="text-sm font-semibold text-gold tracking-wide whitespace-nowrap">我的彩金</h2>
+        <div class="h-px flex-1 bg-surface-border"></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
+        <div class="lg:col-span-3 card-glass rounded-2xl p-6 md:p-8 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-40 h-40 bg-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative">
+            <div class="flex items-start justify-between mb-6">
+              <div>
+                <p class="text-gray-500 text-xs mb-1">會員</p>
+                <p class="font-medium" id="userInfo">王小明 · M001</p>
+              </div>
+              <span id="levelBadge" class="text-xs font-semibold px-3 py-1 rounded-full border border-gold/40 text-gold bg-gold/10">S 級</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-1">可領取彩金</p>
+            <p class="text-4xl md:text-5xl font-bold gold-text mb-1" id="claimable">$79.75</p>
+            <p class="text-gray-500 text-xs mb-6" id="effectiveLevel">有效等級 S · 日息 0.055%</p>
+            <div class="mb-6">
+              <div class="flex justify-between text-xs text-gray-500 mb-2">
+                <span>即時預估累積</span>
+                <span id="realtimeEstimate" class="text-gold-light font-medium">$42.35</span>
+              </div>
+              <div class="h-1.5 bg-surface-border rounded-full overflow-hidden">
+                <div id="estimateBar" class="h-full progress-glow rounded-full transition-all duration-500" style="width:58%"></div>
+              </div>
+              <p class="text-gray-600 text-xs mt-1.5">自上次結算起持續累積中</p>
+            </div>
+            <a href="claim-result.html" class="btn-gold inline-flex items-center gap-2 text-surface font-semibold px-8 py-3 rounded-xl text-sm transition">
+              立即領取彩金
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2 flex flex-col gap-4">
+          <div class="card-glass rounded-2xl p-5 flex-1">
+            <p class="text-gray-500 text-xs mb-3">計獎金額</p>
+            <p class="text-2xl font-bold text-white mb-4" id="rewardBase">$580,000</p>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between"><span class="text-gray-500">下次結算</span><span class="text-gold-light font-medium">今日 18:00</span></div>
+              <div class="flex justify-between"><span class="text-gray-500">上次結算</span><span class="text-gray-300">今日 12:00</span></div>
+              <div class="flex justify-between"><span class="text-gray-500">結算頻率</span><span class="text-gray-300">每日 4 次</span></div>
+            </div>
+          </div>
+          <div class="card-glass rounded-2xl p-5">
+            <p class="text-gray-500 text-xs mb-3">今日結算排程</p>
+            <div class="flex justify-between items-center">
+              <div class="flex flex-col items-center gap-1.5 flex-1"><div class="w-2.5 h-2.5 rounded-full bg-surface-border"></div><span class="text-[10px] text-gray-500">00:00</span></div>
+              <div class="h-px flex-1 bg-surface-border mx-1"></div>
+              <div class="flex flex-col items-center gap-1.5 flex-1"><div class="w-2.5 h-2.5 rounded-full bg-surface-border"></div><span class="text-[10px] text-gray-500">06:00</span></div>
+              <div class="h-px flex-1 bg-surface-border mx-1"></div>
+              <div class="flex flex-col items-center gap-1.5 flex-1"><div class="schedule-dot active w-2.5 h-2.5 rounded-full"></div><span class="text-[10px] text-gold">12:00</span></div>
+              <div class="h-px flex-1 bg-surface-border mx-1"></div>
+              <div class="flex flex-col items-center gap-1.5 flex-1"><div class="w-2.5 h-2.5 rounded-full bg-gold/40 ring-2 ring-gold/30"></div><span class="text-[10px] text-gray-400">18:00</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="pendingSection" class="hidden mb-8 card-glass rounded-2xl p-5 border-amber-500/20">
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <p class="text-xs text-gray-500 mb-1">待完成流水</p>
+          <p class="font-medium">$15.50 <span class="text-gray-500 text-sm font-normal">· B 級 · 2x 流水</span></p>
+        </div>
+        <div class="text-right">
+          <p class="text-xs text-gray-500 mb-1">進度 38.7%</p>
+          <div class="w-32 h-1.5 bg-surface-border rounded-full"><div class="h-full bg-amber-500/70 rounded-full" style="width:38.7%"></div></div>
+        </div>
+        <a href="claim-result.html" class="text-gold text-sm hover:underline">查看 →</a>
+      </div>
+    </div>
+
+    <!-- 等級利率 -->
+    <section class="mb-10">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-sm font-semibold text-gray-200">等級利率一覽</h2>
+        <span class="text-xs text-gray-600">持倉越多、等級越高、收益越高</span>
+      </div>
+      <div class="grid grid-cols-5 gap-2 md:gap-3" id="tierCards">
+        <div class="tier-card tier-S rounded-xl border p-3 md:p-4 text-center transition" data-tier="S">
+          <p class="text-lg md:text-xl font-bold text-yellow-300">S</p>
+          <p class="text-gold text-sm md:text-base font-semibold mt-1">0.055%</p>
+          <p class="text-[10px] text-gray-500 mt-0.5">年化 20%</p>
+          <p class="text-[10px] text-gray-500 mt-1">達標條件（Demo）：計獎金額 ≥ 500,000</p>
+        </div>
+        <div class="tier-card tier-A rounded-xl border p-3 md:p-4 text-center transition" data-tier="A">
+          <p class="text-lg md:text-xl font-bold text-gray-300">A</p>
+          <p class="text-gray-300 text-sm md:text-base font-semibold mt-1">0.050%</p>
+          <p class="text-[10px] text-gray-500 mt-0.5">年化 18%</p>
+          <p class="text-[10px] text-gray-500 mt-1">達標條件（Demo）：計獎金額 ≥ 200,000</p>
+        </div>
+        <div class="tier-card tier-B rounded-xl border p-3 md:p-4 text-center transition" data-tier="B">
+          <p class="text-lg md:text-xl font-bold text-amber-700">B</p>
+          <p class="text-gray-400 text-sm md:text-base font-semibold mt-1">0.045%</p>
+          <p class="text-[10px] text-gray-500 mt-0.5">年化 16%</p>
+          <p class="text-[10px] text-gray-500 mt-1">達標條件（Demo）：計獎金額 ≥ 100,000</p>
+        </div>
+        <div class="tier-card tier-C rounded-xl border p-3 md:p-4 text-center transition" data-tier="C">
+          <p class="text-lg md:text-xl font-bold text-gray-500">C</p>
+          <p class="text-gray-500 text-sm md:text-base font-semibold mt-1">0.040%</p>
+          <p class="text-[10px] text-gray-500 mt-0.5">年化 14%</p>
+          <p class="text-[10px] text-gray-500 mt-1">達標條件（Demo）：計獎金額 ≥ 50,000</p>
+        </div>
+        <div class="tier-card tier-D rounded-xl border p-3 md:p-4 text-center transition" data-tier="D">
+          <p class="text-lg md:text-xl font-bold text-gray-600">D</p>
+          <p class="text-gray-500 text-sm md:text-base font-semibold mt-1">0.035%</p>
+          <p class="text-[10px] text-gray-500 mt-0.5">年化 13%</p>
+          <p class="text-[10px] text-gray-500 mt-1">達標條件（Demo）：計獎金額 ≥ 20,000</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 活動詳細 + 條款 ═══ -->
+    <section id="terms" class="mb-6">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="h-px flex-1 bg-surface-border"></div>
+        <h2 class="text-sm font-semibold text-gold tracking-wide whitespace-nowrap">活動詳細說明與條款</h2>
+        <div class="h-px flex-1 bg-surface-border"></div>
+      </div>
+
+      <div class="card-glass rounded-2xl overflow-hidden">
+        <!-- 活動詳細 -->
+        <div class="p-6 border-b border-surface-border/50">
+          <h3 class="text-sm font-semibold text-gold mb-4">一、活動內容</h3>
+          <div class="space-y-4 text-sm text-gray-400 leading-relaxed">
+            <p>本平台推出「餘額每日彩金計劃」，會員帳戶中符合條件的餘額將依等級獲得每日彩金。彩金採<strong class="text-gray-300">百分比制</strong>計算，等級越高日利率越高，最高 S 級日息 0.055%（年化約 20%）。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div class="bg-surface-raised/60 rounded-lg p-4">
+                <p class="text-gray-300 font-medium text-xs mb-2">計獎金額條件</p>
+                <ul class="text-xs space-y-1.5 text-gray-500">
+                  <li>· 新入金需停留 <span class="text-gray-300">24 小時</span> 以上</li>
+                  <li>· 新入金需完成 <span class="text-gray-300">1 倍流水</span></li>
+                  <li>· 未結算注單賠率需 <span class="text-gray-300">≥ 1.80</span></li>
+                  <li>· 計獎金額 = 合格入金 + 合格未結算注單</li>
+                </ul>
+              </div>
+              <div class="bg-surface-raised/60 rounded-lg p-4">
+                <p class="text-gray-300 font-medium text-xs mb-2">結算與領取</p>
+                <ul class="text-xs space-y-1.5 text-gray-500">
+                  <li>· 每日結算 <span class="text-gray-300">4 次</span>（00:00 / 06:00 / 12:00 / 18:00）</li>
+                  <li>· 彩金 = 計獎金額 × 日利率 ÷ 結算次數</li>
+                  <li>· 提供即時預估，顯示結算間隔內累積彩金</li>
+                  <li>· 領取後需完成對應流水方可提領</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 條款 -->
+        <div class="p-6">
+          <h3 class="text-sm font-semibold text-gold mb-4">二、活動條款</h3>
+          <ol class="space-y-3 text-xs text-gray-500 leading-relaxed list-decimal list-inside">
+            <li>本活動僅適用於已完成實名認證且帳戶狀態正常之會員。每位會員僅限一個帳號參與，多帳號操作將被取消資格。</li>
+            <li>彩金金額以系統結算當下之計獎金額與會員等級為準，結算後方可領取。彩金提款需完成 2 倍流水；未完成前僅暫緩提領，彩金不會被回收。</li>
+            <li>本平台有權對異常套利、對沖刷水、多帳號關聯等違規行為進行調查，並保留取消彩金、調降等級或列入黑名單之權利。</li>
+            <li>如遇系統維護、不可抗力或法規要求，本平台有權暫停、修改或終止本活動，恕不另行通知。</li>
+            <li>會員參與本活動即視為同意本條款及平台相關規範。本平台保留本活動最終解釋權。</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <p class="text-center text-xs text-gray-600">BC Platform · 餘額每日彩金計劃</p>
+  </main>
+
+  <script>
+    const accounts = {
+      M001: { name: '王小明', level: 'S', rewardBase: '580,000', estimate: '42.35', claimable: '79.75', effective: 'S', rate: '0.055%', bar: 58, blacklisted: false },
+      M002: { name: '李小華', level: 'B', rewardBase: '140,000', estimate: '8.12', claimable: '15.75', effective: 'B', rate: '0.045%', bar: 35, blacklisted: false, pending: true },
+      M003: { name: '張大同', level: 'D', rewardBase: '28,000', estimate: '1.05', claimable: '2.80', effective: 'C', rate: '0.040%', bar: 22, blacklisted: true, blLevel: 3, maxLevel: 'C' },
+      M004: { name: '陳美玲', level: 'A', rewardBase: '250,000', estimate: '18.50', claimable: '31.25', effective: 'A', rate: '0.050%', bar: 45, blacklisted: false },
+    };
+    function highlightTier(level) {
+      document.querySelectorAll('.tier-card').forEach(el => el.classList.toggle('tier-active', el.dataset.tier === level));
+    }
+    function switchAccount() {
+      const id = document.getElementById('accountSelect').value;
+      const a = accounts[id];
+      document.getElementById('userInfo').textContent = a.name + ' · ' + id;
+      document.getElementById('levelBadge').textContent = a.level + ' 級';
+      document.getElementById('rewardBase').textContent = '$' + a.rewardBase;
+      document.getElementById('realtimeEstimate').textContent = '$' + a.estimate;
+      document.getElementById('claimable').textContent = '$' + a.claimable;
+      document.getElementById('effectiveLevel').textContent = '有效等級 ' + a.effective + ' · 日息 ' + a.rate;
+      document.getElementById('estimateBar').style.width = a.bar + '%';
+      highlightTier(a.effective);
+      const alert = document.getElementById('blacklistAlert');
+      if (a.blacklisted) {
+        alert.classList.remove('hidden');
+        alert.textContent = '⚠ 黑名單 Level ' + a.blLevel + '：最高可領 ' + a.maxLevel + ' 級彩金（原等級 ' + a.level + ' 已降級為 ' + a.effective + '）';
+      } else { alert.classList.add('hidden'); }
+      document.getElementById('pendingSection').classList.toggle('hidden', !a.pending);
+    }
+    switchAccount();
+  </script>
+</body>
+</html>

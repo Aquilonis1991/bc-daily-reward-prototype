@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>黑名單管理 - 平台餘額每日彩金計劃</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="common.css" />
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+  <header class="bg-indigo-700 text-white shadow">
+    <div class="max-w-6xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <h1 class="text-xl font-bold">平台餘額每日彩金計劃</h1>
+          <p class="text-indigo-200 text-sm">後台管理系統</p>
+        </div>
+        <nav class="flex gap-2 flex-wrap text-sm">
+          <a href="admin-blacklist.html" class="px-3 py-1.5 rounded bg-white text-indigo-700 font-medium">黑名單管理</a>
+          <a href="admin-settings.html" class="px-3 py-1.5 rounded text-indigo-100 hover:bg-indigo-600">系統參數</a>
+          <a href="admin-reports.html" class="px-3 py-1.5 rounded text-indigo-100 hover:bg-indigo-600">數據報表</a>
+          <a href="index.html" class="px-3 py-1.5 rounded text-indigo-100 hover:bg-indigo-600 border border-indigo-400">返回前台</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-6xl mx-auto w-full px-4 py-6">
+    <h2 class="text-2xl font-bold mb-6">黑名單管理</h2>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div class="bg-white rounded-lg shadow p-6">
+        <h3 class="font-semibold mb-4">單筆新增</h3>
+        <div class="space-y-3">
+          <input type="text" placeholder="會員編號" class="w-full border rounded-lg px-3 py-2" />
+          <select class="w-full border rounded-lg px-3 py-2">
+            <option>Level 1 - 完全禁止領取</option>
+            <option>Level 2 - 最高 D 級</option>
+            <option>Level 3 - 最高 C 級</option>
+            <option>Level 4 - 最高 B 級</option>
+          </select>
+          <input type="text" placeholder="原因" class="w-full border rounded-lg px-3 py-2" />
+          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg">新增黑名單</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow p-6">
+        <h3 class="font-semibold mb-4">CSV 批量上傳</h3>
+        <p class="text-sm text-gray-500 mb-3">格式：會員編號,等級,原因（每行一筆）</p>
+        <p class="text-xs text-gray-400 mb-3 font-mono">M201,2,異常行為<br/>M202,3,多帳號</p>
+        <input type="file" accept=".csv" class="block w-full text-sm" />
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6 mb-8">
+      <div class="flex flex-wrap gap-3 mb-4">
+        <input type="text" placeholder="搜尋會員編號或原因..." class="border rounded-lg px-3 py-2 flex-1 min-w-[200px]" />
+        <select class="border rounded-lg px-3 py-2"><option>全部等級</option><option>Level 1</option><option>Level 2</option><option>Level 3</option><option>Level 4</option></select>
+      </div>
+      <table class="w-full text-sm">
+        <thead><tr class="bg-gray-50 text-left">
+          <th class="px-3 py-2">會員編號</th><th class="px-3 py-2">等級</th><th class="px-3 py-2">原因</th><th class="px-3 py-2">建立時間</th><th class="px-3 py-2">操作</th>
+        </tr></thead>
+        <tbody>
+          <tr class="border-t"><td class="px-3 py-2 font-mono">M101</td><td class="px-3 py-2">Level 1</td><td class="px-3 py-2">異常套利行為</td><td class="px-3 py-2 text-gray-500">2026/06/26</td><td class="px-3 py-2"><button class="text-red-600 text-sm">移除</button></td></tr>
+          <tr class="border-t"><td class="px-3 py-2 font-mono">M102</td><td class="px-3 py-2">Level 2</td><td class="px-3 py-2">多帳號操作</td><td class="px-3 py-2 text-gray-500">2026/06/28</td><td class="px-3 py-2"><button class="text-red-600 text-sm">移除</button></td></tr>
+          <tr class="border-t"><td class="px-3 py-2 font-mono">M103</td><td class="px-3 py-2">Level 3</td><td class="px-3 py-2">違規投注模式</td><td class="px-3 py-2 text-gray-500">2026/07/01</td><td class="px-3 py-2"><button class="text-red-600 text-sm">移除</button></td></tr>
+          <tr class="border-t"><td class="px-3 py-2 font-mono">M104</td><td class="px-3 py-2">Level 4</td><td class="px-3 py-2">風控觀察中</td><td class="px-3 py-2 text-gray-500">2026/07/03</td><td class="px-3 py-2"><button class="text-red-600 text-sm">移除</button></td></tr>
+          <tr class="border-t"><td class="px-3 py-2 font-mono">M105</td><td class="px-3 py-2">Level 2</td><td class="px-3 py-2">異常提款頻率</td><td class="px-3 py-2 text-gray-500">2026/07/05</td><td class="px-3 py-2"><button class="text-red-600 text-sm">移除</button></td></tr>
+          <tr class="border-t"><td class="px-3 py-2 font-mono">M003</td><td class="px-3 py-2">Level 3</td><td class="px-3 py-2">測試用黑名單（張大同）</td><td class="px-3 py-2 text-gray-500">2026/07/06</td><td class="px-3 py-2"><button class="text-red-600 text-sm">移除</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6">
+      <h3 class="font-semibold mb-4">操作歷史紀錄</h3>
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between border-b pb-2"><div><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">新增</span>新增黑名單 Level 1：異常套利行為</div><span class="text-gray-400">2026/06/26</span></div>
+        <div class="flex justify-between border-b pb-2"><div><span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs mr-2">批量新增</span>CSV 批量新增 3 筆黑名單</div><span class="text-gray-400">2026/07/01</span></div>
+        <div class="flex justify-between border-b pb-2"><div><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">新增</span>新增黑名單 Level 3：測試用黑名單</div><span class="text-gray-400">2026/07/06</span></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-gray-100 border-t text-center text-sm text-gray-500 py-4">BC Daily Reward Demo © 2026</footer>
+</body>
+</html>

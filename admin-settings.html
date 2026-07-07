@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>系統參數 - 平台餘額每日彩金計劃</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="common.css" />
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+  <header class="bg-indigo-700 text-white shadow">
+    <div class="max-w-6xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <h1 class="text-xl font-bold">平台餘額每日彩金計劃</h1>
+          <p class="text-indigo-200 text-sm">後台管理系統</p>
+        </div>
+        <nav class="flex gap-2 flex-wrap text-sm">
+          <a href="admin-blacklist.html" class="px-3 py-1.5 rounded text-indigo-100 hover:bg-indigo-600">黑名單管理</a>
+          <a href="admin-settings.html" class="px-3 py-1.5 rounded bg-white text-indigo-700 font-medium">系統參數</a>
+          <a href="admin-reports.html" class="px-3 py-1.5 rounded text-indigo-100 hover:bg-indigo-600">數據報表</a>
+          <a href="index.html" class="px-3 py-1.5 rounded text-indigo-100 hover:bg-indigo-600 border border-indigo-400">返回前台</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-6xl mx-auto w-full px-4 py-6">
+    <h2 class="text-2xl font-bold mb-6">系統參數設定</h2>
+
+    <div class="space-y-6">
+      <section class="bg-white rounded-lg shadow p-6">
+        <h3 class="font-semibold mb-4">結算時間設定</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm text-gray-600 mb-1">首次結算時間</label>
+            <input type="time" value="00:00" class="border rounded-lg px-3 py-2 w-full" />
+          </div>
+          <div>
+            <label class="block text-sm text-gray-600 mb-1">每日結算次數</label>
+            <select class="border rounded-lg px-3 py-2 w-full">
+              <option selected>4 次（每 6 小時）</option>
+              <option>1 次（每 24 小時）</option>
+              <option>2 次（每 12 小時）</option>
+              <option>6 次（每 4 小時）</option>
+              <option>8 次（每 3 小時）</option>
+              <option>12 次（每 2 小時）</option>
+              <option>24 次（每 1 小時）</option>
+            </select>
+            <p class="text-xs text-gray-400 mt-1">系統自動將 24 小時平均切分為 4 個時段，每段 6 小時</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white rounded-lg shadow p-6">
+        <h3 class="font-semibold mb-4">各等級彩金百分比（每日 %）</h3>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div><label class="block text-sm text-gray-600 mb-1">S 級</label><input type="number" value="0.055" step="0.001" class="border rounded-lg px-3 py-2 w-full" /></div>
+          <div><label class="block text-sm text-gray-600 mb-1">A 級</label><input type="number" value="0.050" step="0.001" class="border rounded-lg px-3 py-2 w-full" /></div>
+          <div><label class="block text-sm text-gray-600 mb-1">B 級</label><input type="number" value="0.045" step="0.001" class="border rounded-lg px-3 py-2 w-full" /></div>
+          <div><label class="block text-sm text-gray-600 mb-1">C 級</label><input type="number" value="0.040" step="0.001" class="border rounded-lg px-3 py-2 w-full" /></div>
+          <div><label class="block text-sm text-gray-600 mb-1">D 級</label><input type="number" value="0.035" step="0.001" class="border rounded-lg px-3 py-2 w-full" /></div>
+        </div>
+      </section>
+
+      <section class="bg-white rounded-lg shadow p-6">
+        <h3 class="font-semibold mb-4">彩金提款流水設定</h3>
+        <div class="max-w-sm">
+          <label class="block text-sm text-gray-600 mb-1">流水倍數（全等級共用）</label>
+          <input type="number" value="2" class="border rounded-lg px-3 py-2 w-full" />
+          <p class="text-xs text-gray-400 mt-1">所有等級統一使用此倍率</p>
+        </div>
+      </section>
+
+      <section class="bg-white rounded-lg shadow p-6">
+        <h3 class="font-semibold mb-4">其他參數</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm text-gray-600 mb-1">新入金需停留小時數</label>
+            <input type="number" value="24" class="border rounded-lg px-3 py-2 w-full" />
+          </div>
+          <div>
+            <label class="block text-sm text-gray-600 mb-1">未結算注單最低賠率門檻</label>
+            <input type="number" value="1.80" step="0.01" class="border rounded-lg px-3 py-2 w-full" />
+          </div>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="realtime" checked class="w-4 h-4" />
+            <label for="realtime" class="text-sm">開啟「即時利息預估顯示」功能</label>
+          </div>
+        </div>
+      </section>
+
+      <button class="bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-indigo-700">儲存設定</button>
+    </div>
+  </main>
+
+  <footer class="bg-gray-100 border-t text-center text-sm text-gray-500 py-4">BC Daily Reward Demo © 2026</footer>
+</body>
+</html>

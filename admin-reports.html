@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>數據報表 - 平台餘額每日彩金計劃</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="common.css" />
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+  <header class="bg-indigo-700 text-white shadow">
+    <div class="max-w-6xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <h1 class="text-xl font-bold">平台餘額每日彩金計劃</h1>
+          <p class="text-indigo-200 text-sm">後台管理系統</p>
+        </div>
+        <nav class="flex gap-2 flex-wrap text-sm">
+          <a href="admin-blacklist.html" class="px-3 py-1.5 rounded text-indigo-100 hover:bg-indigo-600">黑名單管理</a>
+          <a href="admin-settings.html" class="px-3 py-1.5 rounded text-indigo-100 hover:bg-indigo-600">系統參數</a>
+          <a href="admin-reports.html" class="px-3 py-1.5 rounded bg-white text-indigo-700 font-medium">數據報表</a>
+          <a href="index.html" class="px-3 py-1.5 rounded text-indigo-100 hover:bg-indigo-600 border border-indigo-400">返回前台</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-6xl mx-auto w-full px-4 py-6">
+    <h2 class="text-2xl font-bold mb-6">數據報表</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div class="bg-white rounded-lg shadow p-5">
+        <p class="text-sm text-gray-500">結算紀錄筆數</p>
+        <p class="text-2xl font-bold">4</p>
+      </div>
+      <div class="bg-white rounded-lg shadow p-5">
+        <p class="text-sm text-gray-500">累計參與人次</p>
+        <p class="text-2xl font-bold">524</p>
+      </div>
+      <div class="bg-white rounded-lg shadow p-5">
+        <p class="text-sm text-gray-500">累計發放總額</p>
+        <p class="text-2xl font-bold text-indigo-600">$178,381.50</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6 mb-8">
+      <h3 class="font-semibold mb-4">每日結算數據統計</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-gray-50 text-left">
+              <th class="px-3 py-2">日期</th>
+              <th class="px-3 py-2">結算時間</th>
+              <th class="px-3 py-2">參與人數</th>
+              <th class="px-3 py-2">發放總額</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t"><td class="px-3 py-2">2026-07-06</td><td class="px-3 py-2">00:00</td><td class="px-3 py-2">98</td><td class="px-3 py-2 font-medium">$32,100.00</td></tr>
+            <tr class="border-t"><td class="px-3 py-2">2026-07-06</td><td class="px-3 py-2">06:00</td><td class="px-3 py-2">128</td><td class="px-3 py-2 font-medium">$45,230.50</td></tr>
+            <tr class="border-t"><td class="px-3 py-2">2026-07-06</td><td class="px-3 py-2">12:00</td><td class="px-3 py-2">156</td><td class="px-3 py-2 font-medium">$52,100.75</td></tr>
+            <tr class="border-t"><td class="px-3 py-2">2026-07-06</td><td class="px-3 py-2">18:00</td><td class="px-3 py-2">142</td><td class="px-3 py-2 font-medium">$48,950.25</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6">
+      <h3 class="font-semibold mb-4">黑名單統計</h3>
+      <p class="text-lg mb-4">目前黑名單總數：<span class="font-bold text-red-600 ml-2">6</span></p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="border rounded-lg p-4 text-center"><p class="text-sm text-gray-500">Level 1 - 完全禁止</p><p class="text-2xl font-bold mt-1">1</p></div>
+        <div class="border rounded-lg p-4 text-center"><p class="text-sm text-gray-500">Level 2 - 最高 D 級</p><p class="text-2xl font-bold mt-1">2</p></div>
+        <div class="border rounded-lg p-4 text-center"><p class="text-sm text-gray-500">Level 3 - 最高 C 級</p><p class="text-2xl font-bold mt-1">2</p></div>
+        <div class="border rounded-lg p-4 text-center"><p class="text-sm text-gray-500">Level 4 - 最高 B 級</p><p class="text-2xl font-bold mt-1">1</p></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-gray-100 border-t text-center text-sm text-gray-500 py-4">BC Daily Reward Demo © 2026</footer>
+</body>
+</html>
