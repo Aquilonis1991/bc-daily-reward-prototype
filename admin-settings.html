@@ -95,5 +95,34 @@
   </main>
 
   <footer class="bg-gray-100 border-t text-center text-sm text-gray-500 py-4">BC Daily Reward Demo © 2026</footer>
+
+  <script>
+    // 禁用滑鼠右鍵
+    document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+    });
+
+    // 禁用 F12 與開發者工具快捷鍵
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'F12') {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && (e.key === 'S' || e.key === 's')) {
+        e.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>
