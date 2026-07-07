@@ -32,55 +32,282 @@
       <div class="bg-white rounded-lg shadow p-6">
         <h3 class="font-semibold mb-4">單筆新增</h3>
         <div class="space-y-3">
-          <input type="text" placeholder="會員編號" class="w-full border rounded-lg px-3 py-2" />
-          <select class="w-full border rounded-lg px-3 py-2">
-            <option>Level 1 - 完全禁止領取</option>
-            <option>Level 2 - 最高 D 級</option>
-            <option>Level 3 - 最高 C 級</option>
-            <option>Level 4 - 最高 B 級</option>
+          <input type="text" id="memberIdInput" placeholder="會員編號" class="w-full border rounded-lg px-3 py-2" />
+          <select id="levelSelect" class="w-full border rounded-lg px-3 py-2">
+            <option value="Level 1">Level 1 - 完全禁止領取</option>
+            <option value="Level 2">Level 2 - 最高 D 級</option>
+            <option value="Level 3">Level 3 - 最高 C 級</option>
+            <option value="Level 4">Level 4 - 最高 B 級</option>
           </select>
-          <input type="text" placeholder="原因" class="w-full border rounded-lg px-3 py-2" />
-          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg">新增黑名單</button>
+          <input type="text" id="reasonInput" placeholder="原因" class="w-full border rounded-lg px-3 py-2" />
+          <button id="addBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">新增黑名單</button>
         </div>
       </div>
       <div class="bg-white rounded-lg shadow p-6">
         <h3 class="font-semibold mb-4">CSV 批量上傳</h3>
         <p class="text-sm text-gray-500 mb-3">格式：會員編號,等級,原因（每行一筆）</p>
         <p class="text-xs text-gray-400 mb-3 font-mono">M201,2,異常行為<br/>M202,3,多帳號</p>
-        <input type="file" accept=".csv" class="block w-full text-sm" />
+        <input type="file" id="csvFileInput" accept=".csv" class="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer" />
       </div>
     </div>
 
     <div class="bg-white rounded-lg shadow p-6 mb-8">
       <div class="flex flex-wrap gap-3 mb-4">
-        <input type="text" placeholder="搜尋會員編號或原因..." class="border rounded-lg px-3 py-2 flex-1 min-w-[200px]" />
-        <select class="border rounded-lg px-3 py-2"><option>全部等級</option><option>Level 1</option><option>Level 2</option><option>Level 3</option><option>Level 4</option></select>
+        <input type="text" id="searchInput" placeholder="搜尋會員編號或原因..." class="border rounded-lg px-3 py-2 flex-1 min-w-[200px]" />
+        <select id="filterLevelSelect" class="border rounded-lg px-3 py-2">
+          <option value="全部">全部等級</option>
+          <option value="Level 1">Level 1</option>
+          <option value="Level 2">Level 2</option>
+          <option value="Level 3">Level 3</option>
+          <option value="Level 4">Level 4</option>
+        </select>
       </div>
       <table class="w-full text-sm">
         <thead><tr class="bg-gray-50 text-left">
-          <th class="px-3 py-2">會員編號</th><th class="px-3 py-2">等級</th><th class="px-3 py-2">原因</th><th class="px-3 py-2">建立時間</th><th class="px-3 py-2">操作</th>
+          <th class="px-3 py-2">會員編號</th><th class="px-3 py-2">等級</th><th class="px-3 py-2">原因</th><th class="px-3 py-2">建立時間</th><th class="px-3 py-2 text-right pr-6">操作</th>
         </tr></thead>
-        <tbody>
-          <tr class="border-t"><td class="px-3 py-2 font-mono">M101</td><td class="px-3 py-2">Level 1</td><td class="px-3 py-2">異常套利行為</td><td class="px-3 py-2 text-gray-500">2026/06/26</td><td class="px-3 py-2"><button class="text-red-600 text-sm">移除</button></td></tr>
-          <tr class="border-t"><td class="px-3 py-2 font-mono">M102</td><td class="px-3 py-2">Level 2</td><td class="px-3 py-2">多帳號操作</td><td class="px-3 py-2 text-gray-500">2026/06/28</td><td class="px-3 py-2"><button class="text-red-600 text-sm">移除</button></td></tr>
-          <tr class="border-t"><td class="px-3 py-2 font-mono">M103</td><td class="px-3 py-2">Level 3</td><td class="px-3 py-2">違規投注模式</td><td class="px-3 py-2 text-gray-500">2026/07/01</td><td class="px-3 py-2"><button class="text-red-600 text-sm">移除</button></td></tr>
-          <tr class="border-t"><td class="px-3 py-2 font-mono">M104</td><td class="px-3 py-2">Level 4</td><td class="px-3 py-2">風控觀察中</td><td class="px-3 py-2 text-gray-500">2026/07/03</td><td class="px-3 py-2"><button class="text-red-600 text-sm">移除</button></td></tr>
-          <tr class="border-t"><td class="px-3 py-2 font-mono">M105</td><td class="px-3 py-2">Level 2</td><td class="px-3 py-2">異常提款頻率</td><td class="px-3 py-2 text-gray-500">2026/07/05</td><td class="px-3 py-2"><button class="text-red-600 text-sm">移除</button></td></tr>
-          <tr class="border-t"><td class="px-3 py-2 font-mono">M003</td><td class="px-3 py-2">Level 3</td><td class="px-3 py-2">測試用黑名單（張大同）</td><td class="px-3 py-2 text-gray-500">2026/07/06</td><td class="px-3 py-2"><button class="text-red-600 text-sm">移除</button></td></tr>
+        <tbody id="blacklistTableBody">
+          <!-- 會動態生成 -->
         </tbody>
       </table>
     </div>
 
     <div class="bg-white rounded-lg shadow p-6">
       <h3 class="font-semibold mb-4">操作歷史紀錄</h3>
-      <div class="space-y-2 text-sm">
-        <div class="flex justify-between border-b pb-2"><div><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">新增</span>新增黑名單 Level 1：異常套利行為</div><span class="text-gray-400">2026/06/26</span></div>
-        <div class="flex justify-between border-b pb-2"><div><span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs mr-2">批量新增</span>CSV 批量新增 3 筆黑名單</div><span class="text-gray-400">2026/07/01</span></div>
-        <div class="flex justify-between border-b pb-2"><div><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">新增</span>新增黑名單 Level 3：測試用黑名單</div><span class="text-gray-400">2026/07/06</span></div>
+      <div id="historyList" class="space-y-2 text-sm">
+        <!-- 會動態生成 -->
       </div>
     </div>
   </main>
 
   <footer class="bg-gray-100 border-t text-center text-sm text-gray-500 py-4">BC Daily Reward Demo © 2026</footer>
+
+  <script>
+    // 初始資料庫
+    let blacklistData = [
+      { id: 'M101', level: 'Level 1', reason: '異常套利行為', date: '2026/06/26' },
+      { id: 'M102', level: 'Level 2', reason: '多帳號操作', date: '2026/06/28' },
+      { id: 'M103', level: 'Level 3', reason: '違規投注模式', date: '2026/07/01' },
+      { id: 'M104', level: 'Level 4', reason: '風控觀察中', date: '2026/07/03' },
+      { id: 'M105', level: 'Level 2', reason: '異常提款頻率', date: '2026/07/05' },
+      { id: 'M003', level: 'Level 3', reason: '測試用黑名單（張大同）', date: '2026/07/06' }
+    ];
+
+    // 初始歷史紀錄
+    let historyData = [
+      { type: '新增', content: '新增黑名單 Level 1：異常套利行為', date: '2026/06/26' },
+      { type: '批量新增', content: 'CSV 批量新增 3 筆黑名單', date: '2026/07/01' },
+      { type: '新增', content: '新增黑名單 Level 3：測試用黑名單', date: '2026/07/06' }
+    ];
+
+    const tableBody = document.getElementById('blacklistTableBody');
+    const historyList = document.getElementById('historyList');
+    const searchInput = document.getElementById('searchInput');
+    const filterLevelSelect = document.getElementById('filterLevelSelect');
+
+    // 格式化今日日期
+    function getTodayString() {
+      const d = new Date();
+      return `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
+    }
+
+    // 渲染表格
+    function renderTable() {
+      const q = searchInput.value.toLowerCase().trim();
+      const filterLvl = filterLevelSelect.value;
+
+      const filtered = blacklistData.filter(item => {
+        const matchesSearch = item.id.toLowerCase().includes(q) || item.reason.toLowerCase().includes(q);
+        const matchesLevel = filterLvl === '全部' || item.level === filterLvl;
+        return matchesSearch && matchesLevel;
+      });
+
+      tableBody.innerHTML = '';
+      if (filtered.length === 0) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="5" class="px-3 py-8 text-center text-gray-400">查無符合條件的黑名單資料</td>
+          </tr>
+        `;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-t hover:bg-gray-50/80 transition-colors';
+        
+        let badgeColorClass = '';
+        if (item.level === 'Level 1') badgeColorClass = 'bg-red-100 text-red-800';
+        else if (item.level === 'Level 2') badgeColorClass = 'bg-orange-100 text-orange-800';
+        else if (item.level === 'Level 3') badgeColorClass = 'bg-yellow-100 text-yellow-800';
+        else badgeColorClass = 'bg-blue-100 text-blue-800';
+
+        tr.innerHTML = `
+          <td class="px-3 py-3 font-mono font-medium">${item.id}</td>
+          <td class="px-3 py-3">
+            <span class="px-2 py-0.5 rounded text-xs font-semibold ${badgeColorClass}">${item.level}</span>
+          </td>
+          <td class="px-3 py-3 text-gray-600">${item.reason}</td>
+          <td class="px-3 py-3 text-gray-500 font-mono text-xs">${item.date}</td>
+          <td class="px-3 py-3 text-right pr-6">
+            <button onclick="removeUser('${item.id}')" class="text-red-600 hover:text-red-900 font-medium transition-colors">移除</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    // 渲染歷史紀錄
+    function renderHistory() {
+      historyList.innerHTML = '';
+      // 倒序排列，最新紀錄顯示在最上方
+      historyData.slice().reverse().forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'flex justify-between border-b pb-2 items-center';
+        
+        let typeBadge = '';
+        if (item.type === '新增') typeBadge = '<span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">新增</span>';
+        else if (item.type === '批量新增') typeBadge = '<span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs mr-2">批量新增</span>';
+        else if (item.type === '移除') typeBadge = '<span class="bg-red-100 text-red-700 px-2 py-0.5 rounded text-xs mr-2">移除</span>';
+
+        div.innerHTML = `
+          <div class="flex items-center">
+            ${typeBadge}
+            <span class="text-gray-700">${item.content}</span>
+          </div>
+          <span class="text-gray-400 text-xs font-mono">${item.date}</span>
+        `;
+        historyList.appendChild(div);
+      });
+    }
+
+    // 移除黑名單按鈕功能 (保留按鈕本身，但能正確觸發刪除該行會員)
+    window.removeUser = function(id) {
+      const idx = blacklistData.findIndex(item => item.id === id);
+      if (idx !== -1) {
+        const deleted = blacklistData[idx];
+        blacklistData.splice(idx, 1);
+        
+        // 寫入歷史紀錄
+        historyData.push({
+          type: '移除',
+          content: `移除黑名單：會員 ${deleted.id}（${deleted.level}）`,
+          date: getTodayString()
+        });
+
+        renderTable();
+        renderHistory();
+      }
+    };
+
+    // 單筆新增功能
+    document.getElementById('addBtn').addEventListener('click', () => {
+      const mIdEl = document.getElementById('memberIdInput');
+      const lvlEl = document.getElementById('levelSelect');
+      const rsnEl = document.getElementById('reasonInput');
+
+      const id = mIdEl.value.trim().toUpperCase();
+      const level = lvlEl.value;
+      const reason = rsnEl.value.trim();
+
+      if (!id || !reason) {
+        alert('請輸入會員編號與原因！');
+        return;
+      }
+
+      if (blacklistData.some(item => item.id === id)) {
+        alert('此會員已在黑名單列表中！');
+        return;
+      }
+
+      const today = getTodayString();
+      blacklistData.push({ id, level, reason, date: today });
+      
+      historyData.push({
+        type: '新增',
+        content: `新增黑名單 ${level}：${reason} (${id})`,
+        date: today
+      });
+
+      // 清空輸入框
+      mIdEl.value = '';
+      rsnEl.value = '';
+
+      renderTable();
+      renderHistory();
+    });
+
+    // CSV 批量上傳功能
+    document.getElementById('csvFileInput').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const text = evt.target.result;
+        // 依換行切割每一列
+        const lines = text.split(/\r?\n/);
+        let count = 0;
+        const today = getTodayString();
+
+        lines.forEach(line => {
+          if (!line.trim()) return;
+          const columns = line.split(',');
+          if (columns.length >= 2) {
+            const memberId = columns[0].trim().toUpperCase();
+            let levelNum = columns[1].trim();
+            const reason = columns[2] ? columns[2].trim() : '無原因';
+
+            // 忽略標頭列
+            if (memberId === '會員編號' || memberId === 'MEMBER_ID' || memberId === 'ID') return;
+
+            // 等級轉換：如傳入 "2"，轉為 "Level 2"；如已是 "Level 2" 則保留
+            let levelString = levelNum;
+            if (/^\d+$/.test(levelNum)) {
+              levelString = 'Level ' + levelNum;
+            }
+
+            // 檢查重複
+            const exists = blacklistData.some(item => item.id === memberId);
+            if (!exists && memberId) {
+              blacklistData.push({
+                id: memberId,
+                level: levelString,
+                reason: reason,
+                date: today
+              });
+              count++;
+            }
+          }
+        });
+
+        if (count > 0) {
+          historyData.push({
+            type: '批量新增',
+            content: `CSV 批量新增 ${count} 筆黑名單`,
+            date: today
+          });
+          renderTable();
+          renderHistory();
+          alert(`成功批量上傳 ${count} 筆黑名單！`);
+        } else {
+          alert('未能成功匯入任何資料（格式不正確或資料已重複）。');
+        }
+
+        // 清空選擇的檔案，以便可以重複上傳同一個檔案
+        e.target.value = '';
+      };
+
+      reader.readAsText(file);
+    });
+
+    // 搜尋與篩選事件監聽
+    searchInput.addEventListener('input', renderTable);
+    filterLevelSelect.addEventListener('change', renderTable);
+
+    // 初始渲染
+    renderTable();
+    renderHistory();
+  </script>
 </body>
 </html>
