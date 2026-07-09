@@ -43,10 +43,10 @@
       <div class="flex items-center gap-3">
         <select id="accountSelect" onchange="switchAccount()"
           class="bg-surface-raised border border-surface-border text-xs text-gray-300 rounded-full px-4 py-1.5 focus:outline-none focus:border-gold/50">
-          <option value="M001">M001 · 王小明</option>
-          <option value="M002">M002 · 李小華</option>
-          <option value="M003">M003 · 張大同</option>
-          <option value="M004">M004 · 陳美玲</option>
+          <option value="M001">M001 · 史努比</option>
+          <option value="M002">M002 · 卡比瘦</option>
+          <option value="M003">M003 · 白努力</option>
+          <option value="M004">M004 · 亞歷山大</option>
         </select>
         <a href="admin-blacklist.html" class="text-xs text-gray-500 hover:text-gold transition">後台管理 →</a>
       </div>
@@ -118,7 +118,7 @@
             <div class="flex items-start justify-between mb-6">
               <div>
                 <p class="text-gray-500 text-xs mb-1">會員</p>
-                <p class="font-medium" id="userInfo">王小明 · M001</p>
+                <p class="font-medium" id="userInfo">史努比 · M001</p>
               </div>
               <span id="levelBadge" class="text-xs font-semibold px-3 py-1 rounded-full border border-gold/40 text-gold bg-gold/10">S 級</span>
             </div>
@@ -278,10 +278,10 @@
 
   <script>
     const accounts = {
-      M001: { name: '王小明', level: 'S', rewardBase: '580,000', estimate: '42.35', claimable: '79.75', effective: 'S', rate: '0.055%', bar: 58, blacklisted: false },
-      M002: { name: '李小華', level: 'B', rewardBase: '140,000', estimate: '8.12', claimable: '15.75', effective: 'B', rate: '0.045%', bar: 35, blacklisted: false, pending: true },
-      M003: { name: '張大同', level: 'D', rewardBase: '28,000', estimate: '1.05', claimable: '2.80', effective: 'C', rate: '0.040%', bar: 22, blacklisted: true, blLevel: 3, maxLevel: 'C' },
-      M004: { name: '陳美玲', level: 'A', rewardBase: '250,000', estimate: '18.50', claimable: '31.25', effective: 'A', rate: '0.050%', bar: 45, blacklisted: false },
+      M001: { name: '史努比', level: 'S', rewardBase: '580,000', estimate: '42.35', claimable: '79.75', effective: 'S', rate: '0.055%', bar: 58, blacklisted: false },
+      M002: { name: '卡比瘦', level: 'B', rewardBase: '140,000', estimate: '8.12', claimable: '15.75', effective: 'B', rate: '0.045%', bar: 35, blacklisted: false, pending: true },
+      M003: { name: '白努力', level: 'D', rewardBase: '28,000', estimate: '1.05', claimable: '2.80', effective: 'C', rate: '0.040%', bar: 22, blacklisted: true, blLevel: 3, maxLevel: 'C' },
+      M004: { name: '亞歷山大', level: 'A', rewardBase: '250,000', estimate: '18.50', claimable: '31.25', effective: 'A', rate: '0.050%', bar: 45, blacklisted: false },
     };
     function highlightTier(level) {
       document.querySelectorAll('.tier-card').forEach(el => el.classList.toggle('tier-active', el.dataset.tier === level));
