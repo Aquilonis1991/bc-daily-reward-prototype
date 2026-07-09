@@ -3,87 +3,175 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>黑名單管理 - 平台餘額每日彩金計劃</title>
+  <title>運營管理系統 - 每日彩金黑名單管理</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="common.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: { DEFAULT: '#0052d9', hover: '#0045b5', light: '#e1ecff' },
+            sidebar: { bg: '#1e222d', hover: '#2c3243', active: '#0052d9' }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+    body {
+      font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+      background-color: #f5f7fa;
+    }
+    .menu-active {
+      background-color: #0052d9;
+      color: #ffffff !important;
+    }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.15); border-radius: 3px; }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
-  <header class="bg-indigo-700 text-white shadow">
-    <div class="max-w-6xl mx-auto px-4 py-4">
-      <div class="flex items-center justify-between flex-wrap gap-4">
+<body class="text-gray-800 min-h-screen flex selection:bg-primary selection:text-white">
+
+  <!-- LEFT SIDEBAR: Shopline style dark navbar -->
+  <aside class="w-64 bg-sidebar-bg text-gray-300 flex-shrink-0 flex flex-col justify-between shadow-lg sticky top-0 h-screen z-20">
+    <div>
+      <!-- Sidebar Brand Header -->
+      <div class="px-6 py-5 border-b border-gray-700/50 flex items-center gap-2.5">
+        <div class="w-7 h-7 bg-primary rounded flex items-center justify-center font-bold text-white text-sm">BC</div>
         <div>
-          <h1 class="text-xl font-bold">平台餘額每日彩金計劃</h1>
-          <p class="text-indigo-200 text-sm">後台管理系統</p>
-        </div>
-        <nav class="flex gap-2 flex-wrap text-sm">
-          <a href="admin-blacklist.html" class="px-3 py-1.5 rounded bg-white text-indigo-700 font-medium">黑名單管理</a>
-          <a href="admin-settings.html" class="px-3 py-1.5 rounded text-indigo-100 hover:bg-indigo-600">系統參數</a>
-          <a href="admin-reports.html" class="px-3 py-1.5 rounded text-indigo-100 hover:bg-indigo-600">數據報表</a>
-          <a href="index.html" class="px-3 py-1.5 rounded text-indigo-100 hover:bg-indigo-600 border border-indigo-400">返回前台</a>
-        </nav>
-      </div>
-    </div>
-  </header>
-
-  <main class="flex-1 max-w-6xl mx-auto w-full px-4 py-6">
-    <h2 class="text-2xl font-bold mb-6">黑名單管理</h2>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-      <div class="bg-white rounded-lg shadow p-6">
-        <h3 class="font-semibold mb-4">單筆新增</h3>
-        <div class="space-y-3">
-          <input type="text" id="memberIdInput" placeholder="會員編號" class="w-full border rounded-lg px-3 py-2" />
-          <select id="levelSelect" class="w-full border rounded-lg px-3 py-2">
-            <option value="Level 1">Level 1 - 完全禁止領取</option>
-            <option value="Level 2">Level 2 - 最高 D 級</option>
-            <option value="Level 3">Level 3 - 最高 C 級</option>
-            <option value="Level 4">Level 4 - 最高 B 級</option>
-          </select>
-          <input type="text" id="reasonInput" placeholder="原因" class="w-full border rounded-lg px-3 py-2" />
-          <button id="addBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">新增黑名單</button>
+          <h2 class="text-sm font-bold text-white tracking-wider">每日彩金系統</h2>
+          <p class="text-[9px] text-gray-500 font-mono tracking-tight">OPERATIONS PORTAL</p>
         </div>
       </div>
-      <div class="bg-white rounded-lg shadow p-6">
-        <h3 class="font-semibold mb-4">CSV 批量上傳</h3>
-        <p class="text-sm text-gray-500 mb-3">格式：會員編號,等級,原因（每行一筆）</p>
-        <p class="text-xs text-gray-400 mb-3 font-mono">M201,2,異常行為<br/>M202,3,多帳號</p>
-        <input type="file" id="csvFileInput" accept=".csv" class="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer" />
-      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="px-3 py-4 space-y-1 text-xs">
+        <!-- Links to daily reward modules locally -->
+        <a href="admin-settings.html" class="w-full flex items-center gap-2.5 px-4 py-3 rounded-lg text-gray-400 hover:bg-sidebar-hover hover:text-white transition font-medium">
+          <span>💰 每日彩金系統參數</span>
+        </a>
+        <button onclick="location.reload()" class="menu-active w-full flex items-center gap-2.5 px-4 py-3 rounded-lg text-white font-medium">
+          <span>🛡️ 每日彩金黑名單</span>
+        </button>
+        <a href="admin-reports.html" class="w-full flex items-center gap-2.5 px-4 py-3 rounded-lg text-gray-400 hover:bg-sidebar-hover hover:text-white transition font-medium">
+          <span>📊 每日彩金數據報表</span>
+        </a>
+      </nav>
     </div>
 
-    <div class="bg-white rounded-lg shadow p-6 mb-8">
-      <div class="flex flex-wrap gap-3 mb-4">
-        <input type="text" id="searchInput" placeholder="搜尋會員編號或原因..." class="border rounded-lg px-3 py-2 flex-1 min-w-[200px]" />
-        <select id="filterLevelSelect" class="border rounded-lg px-3 py-2">
-          <option value="全部">全部等級</option>
-          <option value="Level 1">Level 1</option>
-          <option value="Level 2">Level 2</option>
-          <option value="Level 3">Level 3</option>
-          <option value="Level 4">Level 4</option>
-        </select>
-      </div>
-      <table class="w-full text-sm">
-        <thead><tr class="bg-gray-50 text-left">
-          <th class="px-3 py-2">會員編號</th><th class="px-3 py-2">等級</th><th class="px-3 py-2">原因</th><th class="px-3 py-2">建立時間</th><th class="px-3 py-2 text-right pr-6">操作</th>
-        </tr></thead>
-        <tbody id="blacklistTableBody">
-          <!-- 會動態生成 -->
-        </tbody>
-      </table>
-    </div>
-
-    <div class="bg-white rounded-lg shadow p-6">
-      <h3 class="font-semibold mb-4">操作歷史紀錄</h3>
-      <div id="historyList" class="space-y-2 text-sm">
-        <!-- 會動態生成 -->
+    <!-- Sidebar Footer -->
+    <div class="p-4 border-t border-gray-700/50 text-[10px] text-gray-500 space-y-2">
+      <div class="bg-gray-800/40 p-2.5 rounded-lg border border-gray-700/30">
+        <p class="font-bold text-gray-400">當前操作員</p>
+        <p class="text-[11px] text-gray-300 mt-1">營運企劃專員 (Staff02)</p>
       </div>
     </div>
-  </main>
+  </aside>
 
-  <footer class="bg-gray-100 border-t text-center text-sm text-gray-500 py-4">BC Daily Reward Demo © 2026</footer>
+  <!-- RIGHT CONTENT AREA -->
+  <div class="flex-1 flex flex-col min-w-0">
+    
+    <!-- Top Navbar Bar -->
+    <header class="bg-white border-b border-gray-200 h-14 flex items-center justify-between px-6 z-10">
+      <div class="flex items-center gap-2">
+        <span class="text-gray-400 text-xs">當前面板:</span>
+        <h2 id="topBarTitle" class="text-xs font-bold text-gray-800">每日彩金黑名單管理</h2>
+      </div>
+
+      <!-- Links -->
+      <div class="flex items-center gap-3">
+        <a href="index.html" target="_blank" class="text-[11px] bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 font-bold px-3 py-1.5 rounded-full transition">
+          開啟前台簽到計劃 ↗
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow p-6 overflow-y-auto space-y-6">
+
+      <div id="view-daily-blacklist" class="space-y-6">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-white rounded-xl border border-gray-200/80 p-5 shadow-sm space-y-3.5 text-xs">
+            <h3 class="font-bold text-gray-800 border-b border-gray-100 pb-2 text-sm">單筆新增黑名單</h3>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-gray-500 mb-1 font-medium">會員編號</label>
+                <input type="text" id="memberIdInput" placeholder="例如: M005" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 text-gray-800 placeholder-gray-400 focus:outline-none focus:border-primary focus:bg-white transition" />
+              </div>
+              <div>
+                <label class="block text-gray-500 mb-1 font-medium">黑名單等級與限制</label>
+                <select id="levelSelect" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 text-gray-800 focus:outline-none focus:border-primary focus:bg-white transition">
+                  <option value="Level 1">Level 1 - 完全禁止領取</option>
+                  <option value="Level 2">Level 2 - 最高 D 級</option>
+                  <option value="Level 3">Level 3 - 最高 C 級</option>
+                  <option value="Level 4">Level 4 - 最高 B 級</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-gray-500 mb-1 font-medium">加入原因</label>
+                <input type="text" id="reasonInput" placeholder="輸入封禁原因，例如: 多帳號套利" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 text-gray-800 placeholder-gray-400 focus:outline-none focus:border-primary focus:bg-white transition" />
+              </div>
+              <button id="addBtn" class="px-4 py-2.5 bg-primary text-white font-bold rounded-lg hover:bg-primary-hover transition">新增黑名單</button>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-gray-200/80 p-5 shadow-sm space-y-3.5 text-xs">
+            <h3 class="font-bold text-gray-800 border-b border-gray-100 pb-2 text-sm">CSV 批量導入</h3>
+            <p class="text-xs text-gray-500">格式範例：會員編號, 等級數字 (1~4), 原因</p>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-200/60 font-mono text-[10px] text-gray-500 leading-relaxed">
+              M201,2,異常行為<br/>M202,3,多帳號關聯
+            </div>
+            <input type="file" id="csvFileInput" accept=".csv" class="block w-full text-xs file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer" />
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl border border-gray-200/80 p-5 shadow-sm space-y-4">
+          <div class="flex flex-wrap gap-3 items-center text-xs">
+            <input type="text" id="searchInput" placeholder="搜尋會員編號或原因..." class="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 flex-grow focus:outline-none focus:border-primary focus:bg-white text-gray-800" />
+            <select id="filterLevelSelect" class="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 focus:outline-none text-gray-800">
+              <option value="全部">全部等級</option>
+              <option value="Level 1">Level 1</option>
+              <option value="Level 2">Level 2</option>
+              <option value="Level 3">Level 3</option>
+              <option value="Level 4">Level 4</option>
+            </select>
+          </div>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left">
+              <thead>
+                <tr class="bg-gray-50 border-b border-gray-200 text-gray-500">
+                  <th class="px-3 py-2.5 font-bold">會員編號</th>
+                  <th class="px-3 py-2.5 font-bold">封禁等級</th>
+                  <th class="px-3 py-2.5 font-bold">原因說明</th>
+                  <th class="px-3 py-2.5 font-bold">加入時間</th>
+                  <th class="px-3 py-2.5 text-right pr-6 font-bold">操作</th>
+                </tr>
+              </thead>
+              <tbody id="blacklistTableBody" class="divide-y divide-gray-100 text-gray-600">
+                <!-- Loaded dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl border border-gray-200/80 p-5 shadow-sm space-y-3">
+          <h3 class="font-bold text-gray-800 border-b border-gray-100 pb-2 text-xs">操作審計歷史紀錄</h3>
+          <div id="historyList" class="space-y-2 text-xs text-gray-600">
+            <!-- Loaded dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
 
   <script>
-    // 初始資料庫
+    // ═══ Blacklist Database Logic ═══
     let blacklistData = [
       { id: 'M101', level: 'Level 1', reason: '異常套利行為', date: '2026/06/26' },
       { id: 'M102', level: 'Level 2', reason: '多帳號操作', date: '2026/06/28' },
@@ -93,7 +181,6 @@
       { id: 'M003', level: 'Level 3', reason: '測試用黑名單（白努力）', date: '2026/07/06' }
     ];
 
-    // 初始歷史紀錄
     let historyData = [
       { type: '新增', content: '新增黑名單 Level 1：異常套利行為', date: '2026/06/26' },
       { type: '批量新增', content: 'CSV 批量新增 3 筆黑名單', date: '2026/07/01' },
@@ -105,13 +192,11 @@
     const searchInput = document.getElementById('searchInput');
     const filterLevelSelect = document.getElementById('filterLevelSelect');
 
-    // 格式化今日日期
     function getTodayString() {
       const d = new Date();
       return `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
     }
 
-    // 渲染表格
     function renderTable() {
       const q = searchInput.value.toLowerCase().trim();
       const filterLvl = filterLevelSelect.value;
@@ -134,7 +219,7 @@
 
       filtered.forEach(item => {
         const tr = document.createElement('tr');
-        tr.className = 'border-t hover:bg-gray-50/80 transition-colors';
+        tr.className = 'border-t border-gray-100 hover:bg-gray-50/80 transition-colors';
         
         let badgeColorClass = '';
         if (item.level === 'Level 1') badgeColorClass = 'bg-red-100 text-red-800';
@@ -157,13 +242,11 @@
       });
     }
 
-    // 渲染歷史紀錄
     function renderHistory() {
       historyList.innerHTML = '';
-      // 倒序排列，最新紀錄顯示在最上方
       historyData.slice().reverse().forEach(item => {
         const div = document.createElement('div');
-        div.className = 'flex justify-between border-b pb-2 items-center';
+        div.className = 'flex justify-between border-b border-gray-100 pb-2 items-center';
         
         let typeBadge = '';
         if (item.type === '新增') typeBadge = '<span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">新增</span>';
@@ -181,14 +264,12 @@
       });
     }
 
-    // 移除黑名單按鈕功能 (保留按鈕本身，但能正確觸發刪除該行會員)
     window.removeUser = function(id) {
       const idx = blacklistData.findIndex(item => item.id === id);
       if (idx !== -1) {
         const deleted = blacklistData[idx];
         blacklistData.splice(idx, 1);
         
-        // 寫入歷史紀錄
         historyData.push({
           type: '移除',
           content: `移除黑名單：會員 ${deleted.id}（${deleted.level}）`,
@@ -200,7 +281,6 @@
       }
     };
 
-    // 單筆新增功能
     document.getElementById('addBtn').addEventListener('click', () => {
       const mIdEl = document.getElementById('memberIdInput');
       const lvlEl = document.getElementById('levelSelect');
@@ -229,7 +309,6 @@
         date: today
       });
 
-      // 清空輸入框
       mIdEl.value = '';
       rsnEl.value = '';
 
@@ -237,7 +316,6 @@
       renderHistory();
     });
 
-    // CSV 批量上傳功能
     document.getElementById('csvFileInput').addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (!file) return;
@@ -245,7 +323,6 @@
       const reader = new FileReader();
       reader.onload = function(evt) {
         const text = evt.target.result;
-        // 依換行切割每一列
         const lines = text.split(/\r?\n/);
         let count = 0;
         const today = getTodayString();
@@ -258,16 +335,13 @@
             let levelNum = columns[1].trim();
             const reason = columns[2] ? columns[2].trim() : '無原因';
 
-            // 忽略標頭列
             if (memberId === '會員編號' || memberId === 'MEMBER_ID' || memberId === 'ID') return;
 
-            // 等級轉換：如傳入 "2"，轉為 "Level 2"；如已是 "Level 2" 則保留
             let levelString = levelNum;
             if (/^\d+$/.test(levelNum)) {
               levelString = 'Level ' + levelNum;
             }
 
-            // 檢查重複
             const exists = blacklistData.some(item => item.id === memberId);
             if (!exists && memberId) {
               blacklistData.push({
@@ -294,47 +368,18 @@
           alert('未能成功匯入任何資料（格式不正確或資料已重複）。');
         }
 
-        // 清空選擇的檔案，以便可以重複上傳同一個檔案
         e.target.value = '';
       };
 
       reader.readAsText(file);
     });
 
-    // 搜尋與篩選事件監聽
     searchInput.addEventListener('input', renderTable);
     filterLevelSelect.addEventListener('change', renderTable);
 
-    // 初始渲染
+    // Boot initialize
     renderTable();
     renderHistory();
-
-    // 禁用滑鼠右鍵
-    document.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-    });
-
-    // 禁用 F12 與開發者工具快捷鍵
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'F12') {
-        e.preventDefault();
-      }
-      if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
-        e.preventDefault();
-      }
-      if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) {
-        e.preventDefault();
-      }
-      if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
-        e.preventDefault();
-      }
-      if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
-        e.preventDefault();
-      }
-      if (e.ctrlKey && (e.key === 'S' || e.key === 's')) {
-        e.preventDefault();
-      }
-    });
   </script>
 </body>
 </html>
