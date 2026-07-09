@@ -55,16 +55,15 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center overflow-x-hidden pb-24">
+<body class="text-gray-200 overflow-hidden bg-[#0c0f16]">
 
-  <!-- Main Mobile App Layout Wrapper (max-w-md, full-width, clean margin) -->
-  <div class="w-full max-w-md flex flex-col min-h-screen bg-[#080b10] relative shadow-2xl">
+  <!-- Main Mobile App Layout Wrapper -->
+  <div class="relative w-full h-screen bg-[#080b10] flex flex-col overflow-hidden">
 
     <!-- Header bar -->
-    <header class="px-4 py-3 flex items-center justify-between border-b border-surface-border/40 bg-[#090c12]/95 backdrop-blur sticky top-0 z-40">
+    <header class="px-4 py-3 flex items-center justify-between border-b border-surface-border/40 bg-[#090c12]/95 backdrop-blur z-40 relative">
       <div class="flex items-center gap-1.5">
-        <span class="text-gold font-black text-sm tracking-widest Outfit">BC MEET</span>
-        <span class="text-[9px] bg-gold/15 text-gold border border-gold/30 px-1.5 py-0.5 rounded font-mono font-bold">DAILY</span>
+        <span class="text-gold font-black text-sm tracking-widest Outfit">優惠活動</span>
       </div>
       
       <!-- Account Switcher & Admin Link -->
@@ -264,31 +263,31 @@
         </div>
       </div>
 
-      <!-- Footer Info -->
-      <p class="text-center text-[10px] text-gray-600 font-mono pt-2">BC Platform · Daily Reward Version 2.0</p>
     </div>
 
-    <!-- BOTTOM TAB BAR NAVIGATION: Floating glassmorphism -->
-    <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#080b10] via-[#080b10]/95 to-transparent z-40 flex justify-center">
-      <nav class="w-full glass-panel rounded-2xl py-2 px-4 flex justify-between items-center text-gray-400 font-bold shadow-2xl backdrop-blur-md text-[10px]">
-        <button onclick="alert('進入大廳...')" class="flex flex-col items-center justify-center gap-1 py-1 hover:text-white transition">
-          <span class="text-base">🏠</span>
-          <span>大廳</span>
-        </button>
-        <button onclick="location.reload()" class="flex flex-col items-center justify-center gap-1 py-1 text-gold">
-          <span class="text-base">💰</span>
-          <span>餘額彩金</span>
-        </button>
-        <button onclick="alert('進入收益明細...')" class="flex flex-col items-center justify-center gap-1 py-1 hover:text-white transition">
-          <span class="text-base">📈</span>
-          <span>收益明細</span>
-        </button>
-        <button onclick="alert('進入個人中心...')" class="flex flex-col items-center justify-center gap-1 py-1 hover:text-white transition">
-          <span class="text-base">👤</span>
-          <span>我的</span>
-        </button>
-      </nav>
-    </div>
+    <!-- BOTTOM TAB BAR NAVIGATION: Fixed bottom toolbar -->
+    <nav class="bg-[#090c12]/95 border-t border-surface-border/50 flex justify-around py-2.5 text-[10px] font-bold text-gray-500 z-40 relative">
+      <a href="../../手機app頁面/index.html" class="flex flex-col items-center gap-0.5 hover:text-gray-300">
+        <span class="text-lg">🎮</span>
+        <span>首頁</span>
+      </a>
+      <a href="../../手機app頁面/index.html" class="flex flex-col items-center gap-0.5 text-gold relative">
+        <span class="text-lg">🎁</span>
+        <span>優惠</span>
+      </a>
+      <a href="#" onclick="alert('進入充值...')" class="flex flex-col items-center gap-0.5 hover:text-gray-300">
+        <span class="text-lg">💰</span>
+        <span>充值</span>
+      </a>
+      <a href="#" onclick="alert('進入提現...')" class="flex flex-col items-center gap-0.5 hover:text-gray-300 font-mono">
+        <span class="text-lg font-bold">$</span>
+        <span>提現</span>
+      </a>
+      <a href="#" onclick="alert('進入我的...')" class="flex flex-col items-center gap-0.5 hover:text-gray-300">
+        <span class="text-lg">👤</span>
+        <span>我的</span>
+      </a>
+    </nav>
 
   </div>
 
@@ -326,33 +325,6 @@
     }
     
     switchAccount();
-
-    // 禁用滑鼠右鍵
-    document.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-    });
-
-    // 禁用 F12 與開發者工具快捷鍵
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'F12') {
-        e.preventDefault();
-      }
-      if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
-        e.preventDefault();
-      }
-      if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) {
-        e.preventDefault();
-      }
-      if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
-        e.preventDefault();
-      }
-      if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
-        e.preventDefault();
-      }
-      if (e.ctrlKey && (e.key === 'S' || e.key === 's')) {
-        e.preventDefault();
-      }
-    });
   </script>
 </body>
 </html>
