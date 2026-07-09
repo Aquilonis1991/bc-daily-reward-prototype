@@ -168,18 +168,7 @@
       </div>
     </section>
 
-    <div id="pendingSection" class="hidden mb-8 card-glass rounded-2xl p-5 border-amber-500/20">
-      <div class="flex items-center justify-between flex-wrap gap-3">
-        <div>
-          <p class="text-xs text-gray-500 mb-1">待完成流水</p>
-          <p class="font-medium">$15.50 <span class="text-gray-500 text-sm font-normal">· B 級 · 2x 流水</span></p>
-        </div>
-        <div class="text-right">
-          <p class="text-xs text-gray-500 mb-1">進度 38.7%</p>
-          <div class="w-32 h-1.5 bg-surface-border rounded-full"><div class="h-full bg-amber-500/70 rounded-full" style="width:38.7%"></div></div>
-        </div>
-      </div>
-    </div>
+
 
     <!-- 等級利率 -->
     <section class="mb-10">
@@ -301,7 +290,6 @@
         alert.classList.remove('hidden');
         alert.textContent = '⚠ 黑名單 Level ' + a.blLevel + '：最高可領 ' + a.maxLevel + ' 級彩金（原等級 ' + a.level + ' 已降級為 ' + a.effective + '）';
       } else { alert.classList.add('hidden'); }
-      document.getElementById('pendingSection').classList.toggle('hidden', !a.pending);
     }
     switchAccount();
 
