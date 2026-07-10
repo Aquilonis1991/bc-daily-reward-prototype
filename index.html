@@ -83,7 +83,7 @@
     </header>
 
     <!-- Scrollable Content container -->
-    <div class="flex-1 p-4 space-y-5 overflow-y-auto no-scrollbar">
+    <div class="flex-1 p-4 space-y-5 overflow-y-auto no-scrollbar pb-20">
 
       <!-- Banners / Hero Info -->
       <div class="text-center py-2 space-y-1">
@@ -266,27 +266,27 @@
     </div>
 
     <!-- BOTTOM TAB BAR NAVIGATION: Fixed bottom toolbar -->
-    <nav class="bg-[#090c12]/95 border-t border-surface-border/50 flex justify-around py-2.5 text-[10px] font-bold text-gray-500 z-40 relative">
-      <a href="../../手機app頁面/index.html" class="flex flex-col items-center gap-0.5 hover:text-gray-300">
-        <span class="text-lg">🎮</span>
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-[#090c12]/95 border-t border-surface-border/50 flex items-center justify-around text-[10px] text-gray-500 z-50 h-14">
+      <a href="../../手機app頁面/index.html" class="flex flex-col items-center gap-1 hover:text-white transition">
+        <span class="text-sm">🎮</span>
         <span>首頁</span>
       </a>
-      <a href="../../手機app頁面/index.html" class="flex flex-col items-center gap-0.5 text-gold relative">
-        <span class="text-lg">🎁</span>
+      <a href="../../手機app頁面/index.html" class="flex flex-col items-center gap-1 text-gold font-bold transition">
+        <span class="text-sm">🎁</span>
         <span>優惠</span>
       </a>
-      <a href="#" onclick="alert('進入充值...')" class="flex flex-col items-center gap-0.5 hover:text-gray-300">
-        <span class="text-lg">💰</span>
+      <button onclick="alert('進入充值...')" class="flex flex-col items-center gap-1 hover:text-white transition">
+        <span class="text-sm">💰</span>
         <span>充值</span>
-      </a>
-      <a href="#" onclick="alert('進入提現...')" class="flex flex-col items-center gap-0.5 hover:text-gray-300 font-mono">
-        <span class="text-lg font-bold">$</span>
+      </button>
+      <button onclick="alert('進入提現...')" class="flex flex-col items-center gap-1 hover:text-white transition">
+        <span class="text-sm">$</span>
         <span>提現</span>
-      </a>
-      <a href="#" onclick="alert('進入我的...')" class="flex flex-col items-center gap-0.5 hover:text-gray-300">
-        <span class="text-lg">👤</span>
+      </button>
+      <button onclick="alert('進入我的...')" class="flex flex-col items-center gap-1 hover:text-white transition">
+        <span class="text-sm">👤</span>
         <span>我的</span>
-      </a>
+      </button>
     </nav>
 
   </div>
